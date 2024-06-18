@@ -1235,7 +1235,7 @@ section,
 
 .features .nav-item {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .features .nav-item:last-child {
@@ -1245,22 +1245,21 @@ section,
 .features .nav-link {
   color: var(--heading-color);
   border: 0;
-  padding: 30px;
+  padding: 20px;
   transition: 0.3s;
   border-radius: 10px;
   display: flex;
   cursor: pointer;
 }
 
-.features .nav-link i {
-  background-color: var(--contrast-color);
-  color: var(--accent-color);
+.features .nav-link img {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
   width: 48px;
   height: 48px;
+  object-fit: cover;
   font-size: 22px;
   flex-shrink: 0;
   border-radius: 50px;
@@ -1275,8 +1274,9 @@ section,
 }
 
 .features .nav-link p {
-  font-size: 15px;
-  margin: 0;
+  font-size: 16px;
+  margin: auto;
+  display: flex;
 }
 
 .features .nav-link:hover {
@@ -1285,10 +1285,6 @@ section,
 
 .features .nav-link.active {
   background: rgba(var(--accent-color-rgb), 0.08);
-}
-
-.features .tab-pane img {
-  border-radius: 15px;
 }
 
 /*--------------------------------------------------------------

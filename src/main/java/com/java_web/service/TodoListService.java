@@ -18,5 +18,7 @@ public interface TodoListService {
     public boolean updateDueDate(Integer todoId, Date dueDate);
     public boolean updateStatus(Integer todoId, String status);
 
+    // update at Home Page from doing -> done
+    public boolean updateStatusAtHomePage(Integer todoId);
 
 }
