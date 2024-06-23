@@ -12,7 +12,7 @@ public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="job_id")
-	private int id;
+	private Integer id;
 	@Column(name="job_name")
 	private String name;
 	@Column(name="job_require")
@@ -43,4 +43,6 @@ public class Job {
 	private String experienceLevel;
 	@Column(name="job_employer")
 	private String employer;
+	@Column(name="job_img")
+	private String image;
 }

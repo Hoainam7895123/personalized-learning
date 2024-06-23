@@ -10,43 +10,38 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../admin/img/logo.png" rel="icon">
-  <link href="../admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link th:href="@{/admin/img/logo.png}" rel="icon">
+  <link th:href="@{/admin/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../admin/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../admin/css/bootstrap-icons.css" rel="stylesheet">
-  <link href="../admin/css/boxicons.min.css" rel="stylesheet">
-  <link href="../admin/css/quill.snow.css" rel="stylesheet">
-  <link href="../admin/css/quill.bubble.css" rel="stylesheet">
-  <link href="../admin/css/remixicon.css" rel="stylesheet">
-  <link href="../admin/css/simple-datatables/style.css" rel="stylesheet">
+  <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/quill.snow.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/quill.bubble.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/remixicon.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/simple-datatables/style.css}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../admin/css/style.css" rel="stylesheet">
-  <link href="../admin/css/custom.css" rel="stylesheet">
+  <link th:href="@{/admin/css/style.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/job-custom.css}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
+	<!-- ======== response ========= -->
+	<input id="addResponse" type="hidden" th:attr="value=${addResponse == null ? '' : addResponse}">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="../admin/img/logo.png" alt="">
+        <img th:src="@{/admin/img/logo.png}" alt="">
         <span class="d-none d-lg-block">Admin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -161,7 +156,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-1.jpg" alt="" class="rounded-circle">
+                <img src="assets/../admin/img/messages-1.jpg}" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -175,7 +170,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img src="assets/../admin/img/messages-2.jpg}" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -189,7 +184,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-3.jpg" alt="" class="rounded-circle">
+                <img src="assets/../admin/img/messages-3.jpg}" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -212,7 +207,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../admin/img/avatar.png" alt="Profile" class="rounded-circle">
+            <img th:src="@{/admin/img/avatar.png}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">H. Sac</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -288,17 +283,17 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-job.html">
+            <a th:href="@{'/admin/job'}">
               <i class="bi bi-circle"></i><span>List</span>
             </a>
           </li>
           <li>
-            <a href="tables-job-add.html" class="active">
+            <a th:href="@{'/admin/job/add'}" class="active">
               <i class="bi bi-circle"></i><span>Add new</span>
             </a>
           </li>
           <li>
-            <a href="tables-job-edit.html">
+            <a th:href="@{'/admin/job/edit?id=0'}">
               <i class="bi bi-circle"></i><span>Edit</span>
             </a>
           </li>
@@ -385,29 +380,26 @@
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#job-add"><i class="bi bi-plus-circle me-2"></i>Add new</button>
                 </li>
-
+                
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#job-change-employer"><i class="bi bi-person-workspace me-2"></i>Add Employer</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#job-add-file"><i class="bi bi-plus-circle-fill me-2"></i>Add from file</button>
                 </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings"><i class="bi bi-gear me-2"></i>Settings</button>
-                </li>
-
               </ul>
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-edit pt-3" id="job-add">
 
                   <!-- Profile Add Form -->
-                  <form id="addJobForm">
+                  <form id="addJobForm" class="needs-validation" novalidate th:object="${newJob}" enctype="multipart/form-data">
                     <div class="row mb-3">
                       <label for="jobImage" class="col-md-3 col-lg-2 col-form-label">Job Image</label>
                       <div class="col-md-9 col-lg-10">
-                        <img src="../admin/img/job.jpg" alt="Job Img">
+                        <img th:src="@{/admin/img/job.jpg}" alt="Job Img" id="jobImageSrc">
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new job image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove job image"><i class="bi bi-trash"></i></a>
+                          <a onclick="document.getElementById('jobImg').click();" class="btn btn-primary btn-sm" title="Upload new job image"><i class="bi bi-upload"></i>
+                          <input type="file" name="jobImg" id="jobImg" class="d-none" onchange="previewImage(event)">
+                          </a>
+                          <a onclick="removeImage()" class="btn btn-danger btn-sm" title="Remove job image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
@@ -415,113 +407,68 @@
                     <div class="row mb-3">
                       <label for="jobName" class="col-md-3 col-lg-2 col-form-label">Job Name</label>
                       <div class="col-md-9 col-lg-10">
-                        <input name="jobName" type="text" class="form-control" id="jobName" value="Software Developer/Engineer">
+                        <input name="jobName" type="text" class="form-control" id="jobName" value="" required th:field="*{name}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobDescription" class="col-md-3 col-lg-2 col-form-label">Description</label>
                       <div class="col-md-9 col-lg-10">
-                        <textarea name="jobDescription" class="form-control" id="jobDescription" style="height: 100px">Designs, develops, tests, and maintains software applications.</textarea>
+                        <textarea name="jobDescription" class="form-control" id="jobDescription" style="height: 100px" th:field="*{description}"></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobRequire" class="col-md-3 col-lg-2 col-form-label">Require</label>
                       <div class="col-md-9 col-lg-10">
-                        <textarea name="jobRequire" class="form-control" id="jobRequire" style="height: 100px">Designs, develops, tests, and maintains software applications.</textarea>
+                        <textarea name="jobRequire" class="form-control" id="jobRequire" style="height: 100px" required th:field="*{require}"></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobLink" class="col-md-3 col-lg-2 col-form-label">Link</label>
                       <div class="col-md-9 col-lg-10">
-                        <textarea name="jobLink" class="form-control" id="jobLink" style="height: 70px">Designs, develops, tests, and maintains software applications.</textarea>
+                        <textarea name="jobLink" class="form-control" id="jobLink" style="height: 70px" th:field="*{links}"></textarea>
                       </div>
                     </div>
-
-                    <div class="text-center">
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"">Add New</button>
-                    </div>
-                  </form><!-- End Profile Add Form -->
-
-                </div>
-
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="jobName" class="col-md-3 col-lg-2 col-form-label">Notifications</label>
-                      <div class="col-md-9 col-lg-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="jobChange" checked>
-                          <label class="form-check-label" for="jobChange">
-                            Changes made to table job
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new applier and employer
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End settings Form -->
-
-                </div>
-
-                <div class="tab-pane fade pt-3" id="job-change-employer">
-                  <!-- Change Employer form -->
-                  <form method="post">
-
+                    
                     <div class="row mb-3">
                       <label for="jobEmployer" class="col-md-3 col-lg-2 col-form-label">Employer</label>
                       <div class="col-md-9 col-lg-10">
-                        <input name="text" type="text" class="form-control" id="jobEmployer">
+                        <input name="text" type="text" class="form-control" id="jobEmployer" th:field="*{employer}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobOffer" class="col-md-3 col-lg-2 col-form-label">Offer</label>
                       <div class="col-md-9 col-lg-10">
-                        <textarea name="jobOffer" class="form-control" id="jobOffer" style="height: 100px"></textarea>
+                        <textarea name="jobOffer" class="form-control" id="jobOffer" style="height: 100px" th:field="*{offer}"></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobLevel" class="col-md-3 col-lg-2 col-form-label">Experienced Level</label>
                       <div class="col-md-9 col-lg-10">
-                        <input name="jobLevel" type="password" class="form-control" id="jobLevel">
+                        <input name="jobLevel" type="password" class="form-control" id="jobLevel" th:field="*{experienceLevel}">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary" onclick="">Add Employer</button>
+                      <button type="button" class="btn btn-primary" onclick="preaddJob(this.form)">Add New</button>
                     </div>
-                  </form><!-- End Change Employer Form -->
+                  </form><!-- End Profile Add Form -->
 
                 </div>
-
-              </div><!-- End Bordered Tabs -->
+                
+                <div class="tab-pane fade profile-edit pt-3" id="job-add-file">
+                	<button class="btn btn-primary fs-5" onclick="document.getElementById('jobImgFile').click();"><i class="bi bi-file-earmark-arrow-up me-2"></i>Upload file</button>
+                	<form th:action="@{/admin/job/addfile}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                		<input type="file" name="jobImgFile" id="jobImgFile" class="d-none">
+                		<div class="text-start mt-3">
+                      		<button type="submit" class="btn btn-outline-primary">Add New</button>
+                    	</div>
+                	</form>
+                </div>
 
             </div>
           </div>
@@ -556,12 +503,12 @@
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="addNewToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" ata-bs-delay="3000">
       <div class="toast-header">
-        <img src="../admin/img/avatar.png" class="avatar-sm rounded me-2" alt="...">
+        <img th:src="@{/admin/img/avatar.png}" class="avatar-sm rounded me-2" alt="...">
         <strong class="me-auto">Nguyen Hong Sac</strong>
         <small>now</small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body" id="addJobContent">
+      <div class="toast-body" id="addToastContent">
         Add new job successful!
       </div>
     </div>
@@ -579,19 +526,19 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../admin/js/apexcharts.min.js"></script>
-  <script src="../admin/js/bootstrap.bundle.min.js"></script>
-  <script src="../admin/js/chart.umd.js"></script>
-  <script src="../admin/js/echarts.min.js"></script>
-  <script src="../admin/js/quill.min.js"></script>
-  <script src="../admin/js/simple-datatables.js"></script>
-  <script src="../admin/js/tinymce.min.js"></script>
+  <script th:src="@{/admin/js/apexcharts.min.js}"></script>
+  <script th:src="@{/admin/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/admin/js/chart.umd.js}"></script>
+  <script th:src="@{/admin/js/echarts.min.js}"></script>
+  <script th:src="@{/admin/js/quill.min.js}"></script>
+  <script th:src="@{/admin/js/simple-datatables.js}"></script>
+  <script th:src="@{/admin/js/tinymce.min.js}"></script>
 
   <!-- Template Main JS File -->
-  <script src="../admin/js/main.js"></script>
-  <script src="../admin/js/custom.js"></script>
-  <script src="../admin/js/add-form.js"></script>
-
+  <script th:src="@{/admin/js/main.js}"></script>
+  <script th:src="@{/admin/js/custom.js}"></script>
+  <script th:src="@{/admin/js/table-job.js}"></script>
+	
 </body>
 
 </html>

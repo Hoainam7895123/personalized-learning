@@ -28,18 +28,13 @@
 
   <!-- Template Main CSS File -->
   <link href="../admin/css/style.css" rel="stylesheet">
-  <link href="../admin/css/custom.css" rel="stylesheet">
+  <link href="../admin/css/job-custom.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
+	<!-- ======== response ========= -->
+	<input id="delResponse" type="hidden" th:attr="value=${delResponse == null ? '' : delResponse}">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -161,7 +156,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-1.jpg" alt="" class="rounded-circle">
+                <img src="../admin/img/messages-1.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -175,7 +170,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img src="../admin/img/messages-2.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -189,7 +184,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-3.jpg" alt="" class="rounded-circle">
+                <img src="../admin/img/messages-3.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -288,17 +283,17 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-job.html" class="active">
+            <a th:href="@{'/admin/job'}" class="active">
               <i class="bi bi-circle"></i><span>List</span>
             </a>
           </li>
           <li>
-            <a href="tables-job-add.html">
+            <a th:href="@{'/admin/job/add'}">
               <i class="bi bi-circle"></i><span>Add new</span>
             </a>
           </li>
           <li>
-            <a href="tables-job-edit.html">
+            <a th:href="@{'/admin/job/edit?id=0'}">
               <i class="bi bi-circle"></i><span>Edit</span>
             </a>
           </li>
@@ -383,7 +378,7 @@
               <!-- Table with stripped rows -->
               <table class="table datatable table-striped table-hover">
                   <div class="position-absolute end-0 mt-2 me-4">
-                    <a href="tables-job-add.html"><button type="button" class="btn btn-primary">
+                    <a th:href="@{job/add}"><button type="button" class="btn btn-primary">
                       <i class="bi bi-plus-square-fill"></i>
                       Add New
                     </button></a>
@@ -403,427 +398,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>Software Developer/Engineer</td>
-                    <td>Proficiency in progr<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency in programming languages (e.g., Java, C++, Python). Understanding of software development life cycle (SDLC). Experience with version control systems (e.g., Git). Problem-solving skills and attention to detail. Ability to write clean, scalable, and maintainable code. Familiarity with Agile methodologies.">... more</a></td>
-                    <td>java, python, nosql</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Designs, develops, t<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Designs, develops, tests, and maintains software applications.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
+                  <!-- List of job -->
+                  <tr th:each="job: ${jobList}">
+                    <td scope="row" th:text="${job.id}">1</td>
+                    <td th:text="${job.name}">Software Developer/Engineer</td>
+                    <td th:text="${job.require}">Proficiency in programming languages (e.g., Java, C++, Python). Understanding of software development life cycle (SDLC). Experience with version control systems (e.g., Git). Problem-solving skills and attention to detail. Ability to write clean, scalable, and maintainable code. Familiarity with Agile methodologies.</td>
+                    <td th:text="${job.skills}">java, python, nosql</td>
+                    <td th:text="${job.links}"><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
+                    <td th:text="${job.description}">Designs, develops, tests, and maintains software applications.</td>
+                    <td th:text="${job.modifiedTime}">2024-04-03 21:45:07</td>
                     <td>
                     <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
+                    <a th:href="@{'/admin/job/edit?id='+${job.id}}"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
+                    <button class="ms-2 btn btn-outline-danger btn-sm" th:onclick="'deleteJob('+${job.id}+')'"><i class="bi bi-trash3-fill"></i></button>
                     </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">2</td>
-                    <td>Systems Analyst</td>
-                    <td>Strong analytical an<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Strong analytical and problem-solving skills.
-                    Proficiency with system analysis tools and techniques.
-                    Experience with database management and SQL.
-                    Ability to understand and model business processes.
-                    Excellent communication and documentation skills.
-                    Knowledge of software and hardware technologies.
-                    ">... more</a></td>
-                    <td>SQL, UML</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Analyzes and designs<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Analyzes and designs information systems to meet business needs.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">3</td>
-                    <td>Network Administrator/Engineer</td>
-                    <td>In-depth knowledge o<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="In-depth knowledge of network protocols (e.g., TCP/IP, DNS, DHCP).
-                    Experience with network hardware (e.g., routers, switches).
-                    Familiarity with network security practices.
-                    Ability to troubleshoot network issues.
-                    Certifications like Cisco CCNA/CCNP can be advantageous.
-                    Knowledge of network monitoring tools.
-                    ">... more</a></td>
-                    <td>Java, C++, Git</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Manages and maintain<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Manages and maintains an organization's computer networks.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">4</td>
-                    <td>Database Administrator (DBA)</td>
-                    <td>Proficiency with dat<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency with database management systems (e.g., Oracle, MySQL, SQL Server). Knowledge of database security, backup, and recovery. Experience with SQL and database optimization techniques. Ability to monitor and maintain database performance. Strong problem-solving skills. Understanding of data modeling and database design.
-                    ">... more</a></td>
-                    <td>Network</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Manages and maintain<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Manages and maintains databases, ensuring data integrity and security.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">5</td>
-                    <td>IT Project Manager</td>
-                    <td>Strong leadership an<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Strong leadership and team management skills.
-                    Proficiency with project management software (e.g., MS Project, JIRA).
-                    Experience with Agile and Scrum methodologies.
-                    Excellent communication and organizational skills.
-                    Ability to manage budgets and timelines.
-                    PMP or similar certification is often preferred.
-                    IT Security Specialist.
-                    ">... more</a></td>
-                    <td>Agile&Scrum, Jira</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Plans, executes, and<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Plans, executes, and oversees IT projects, ensuring they are completed on time and within budget.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">6</td>
-                    <td>IT Security Specialist</td>
-                    <td>Knowledge of securit<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Knowledge of security protocols and practices (e.g., firewalls, encryption).
-                    Experience with security tools (e.g., IDS/IPS, SIEM).
-                    Understanding of regulatory compliance (e.g., GDPR, HIPAA).
-                    Strong analytical and problem-solving skills.
-                    Certifications like CISSP, CEH, or CISM are advantageous.
-                    Ability to develop and implement security policies.
-                    ">... more</a></td>
-                    <td>Firewalls, encryption, IDS/IPS</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Focuses on safeguard<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Focuses on safeguarding an organization's computer systems and networks from security breaches.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">7</td>
-                    <td>Web Developer/Designer</td>
-                    <td>Proficiency in HTML,<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency in HTML, CSS, JavaScript, and frameworks (e.g., React, Angular).
-                    Experience with server-side languages (e.g., PHP, Node.js).
-                    Strong understanding of UI/UX principles.
-                    Ability to create responsive and user-friendly designs.
-                    Familiarity with web development tools and version control systems.
-                    Knowledge of SEO best practices.
-                    ">... more</a></td>
-                    <td>React, Angular, SEO, Node.js</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Creates and designs <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Creates and designs websites, web applications, and user interfaces.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">8</td>
-                    <td>Systems Administrator</td>
-                    <td>Experience with oper<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Experience with operating systems (e.g., Windows, Linux, Unix).
-                    Knowledge of system security and backup/recovery practices.
-                    Ability to troubleshoot hardware and software issues.
-                    Proficiency with system monitoring and management tools.
-                    Strong problem-solving skills.
-                    Familiarity with virtualization technologies (e.g., VMware, Hyper-V).
-                    ">... more</a></td>
-                    <td>Linux, Unix, VNware, Hyper-V</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Manages and maintain<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Manages and maintains an organization's computer systems, including hardware and software.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">9</td>
-                    <td>Business Intelligence (BI) Analyst</td>
-                    <td>Proficiency with BI <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency with BI tools (e.g., Power BI, Tableau).
-                    Strong analytical and data visualization skills.
-                    Experience with SQL and database querying.
-                    Ability to gather and interpret business requirements.
-                    Excellent communication skills.
-                    Understanding of data warehousing concepts.
-                    ">... more</a></td>
-                    <td>Power BI, Tableau</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Analyzes and interpr<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Analyzes and interprets business data to provide insights for decision-making.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">10</td>
-                    <td>Cloud Architect/Engineer</td>
-                    <td>Experience with clou<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Experience with cloud platforms (e.g., AWS, Azure, Google Cloud).
-                    Knowledge of cloud architecture and services.
-                    Ability to design scalable and reliable cloud solutions.
-                    Strong problem-solving and automation skills.
-                    Familiarity with DevOps practices.
-                    Cloud certifications (e.g., AWS Certified Solutions Architect) are beneficial.
-                    ">... more</a></td>
-                    <td>AWS, Azure, Google Cloud</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Designs and implemen<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Designs and implements cloud infrastructure solutions for organizations.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">11</td>
-                    <td>DevOps Engineer</td>
-                    <td>Proficiency with CI/<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency with CI/CD tools (e.g., Jenkins, GitLab).
-                    Experience with configuration management tools (e.g., Ansible, Puppet).
-                    Strong understanding of cloud platforms and services.
-                    Ability to automate and streamline operations and processes.
-                    Knowledge of scripting languages (e.g., Python, Bash).
-                    Familiarity with monitoring and logging tools.
-                    ">... more</a></td>
-                    <td>Power BI, Tableau</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Integrates developme<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Integrates development and operations to improve collaboration and productivity in the software development lifecycle.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">12</td>
-                    <td>Quality Assurance (QA) Tester</td>
-                    <td>Experience with test<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Experience with testing methodologies (e.g., manual, automated).
-                    Proficiency with testing tools (e.g., Selenium, JIRA).
-                    Strong analytical and problem-solving skills.
-                    Ability to write and execute test plans and test cases.
-                    Understanding of SDLC and Agile processes.
-                    Attention to detail and strong communication skills.
-                    ">... more</a></td>
-                    <td>Selenium, Postman</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Ensures the quality <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Ensures the quality of software by testing and identifying bugs or issues.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">13</td>
-                    <td>Technical Support Specialist</td>
-                    <td>Strong troubleshooti<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Strong troubleshooting and problem-solving skills.
-                    Excellent communication and customer service skills.
-                    Proficiency with help desk software and remote support tools.
-                    Knowledge of hardware and software systems.
-                    Ability to document issues and solutions clearly.
-                    Familiarity with operating systems and networking concepts.
-                    ">... more</a></td>
-                    <td>Jenkins, Gitlab, Ansible, Puppet</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Provides assistance <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Provides assistance and troubleshooting for hardware, software, and other IT-related issues.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">14</td>
-                    <td>Data Scientist</td>
-                    <td>Proficiency in progr<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency in programming languages (e.g., Python, R).
-                    Experience with data analysis and visualization tools (e.g., Pandas, Matplotlib).
-                    Strong statistical and mathematical skills.
-                    Ability to build and deploy machine learning models.
-                    Knowledge of big data platforms (e.g., Hadoop, Spark).
-                    Excellent problem-solving and communication skills.
-                    ">... more</a></td>
-                    <td>Python, Pandas, Matplotlib, Hadoop, Spark</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Analyzes and interpr<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Analyzes and interprets complex data sets to inform business decision-making.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">15</td>
-                    <td>IT Consultant</td>
-                    <td>Strong analytical an<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Strong analytical and problem-solving skills.
-                    Excellent communication and interpersonal skills.
-                    Proficiency with various IT systems and software.
-                    Ability to understand and align with business objectives.
-                    Experience with project management and implementation.
-                    Flexibility and adaptability to different environments.
-                    ">... more</a></td>
-                    <td>Commnunication, Troubleshooting, Problem-solving</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Offers expertise and<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Offers expertise and advice to organizations on how to use IT to meet their business objectives.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">16</td>
-                    <td>IT Trainer</td>
-                    <td>Strong knowledge of <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Strong knowledge of IT concepts and technologies.
-                    Excellent communication and presentation skills.
-                    Experience with training methods and instructional design.
-                    Ability to create training materials and documentation.
-                    Patience and ability to explain complex topics clearly.
-                    Familiarity with e-learning platforms and tools.
-                    ">... more</a></td>
-                    <td>Python, Pandas, Matplotlib, Hadoop, Spark</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Educates and trains <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Educates and trains individuals or groups on IT systems, applications, or processes.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">17</td>
-                    <td>Mobile App Developer</td>
-                    <td>Proficiency with mob<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency with mobile development languages (e.g., Swift, Kotlin).
-                    Experience with mobile frameworks (e.g., React Native, Flutter).
-                    Strong understanding of mobile UI/UX design principles.
-                    Ability to optimize app performance and security.
-                    Familiarity with app store submission and guidelines.
-                    Problem-solving skills and attention to detail.
-                    ">... more</a></td>
-                    <td>Swift, Kotlin, React Native, Flutter</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Designs and develops<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Designs and develops applications for mobile devices.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">18</td>
-                    <td>Cybersecurity Analyst</td>
-                    <td>Knowledge of securit<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Knowledge of security tools and practices (e.g., firewalls, antivirus).
-                    Experience with incident response and threat analysis.
-                    Strong analytical and problem-solving skills.
-                    Familiarity with compliance standards (e.g., ISO 27001, NIST).
-                    Ability to develop and implement security policies.
-                    Certifications like CISSP, CEH, or CISM are beneficial.
-                    ">... more</a></td>
-                    <td>IT concepts and technologies, Presentation skills</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Protects computer sy<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Protects computer systems and networks from cyber threats and attacks.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td scope="row">19</td>
-                    <td>AI/Machine Learning Engineer</td>
-                    <td>Proficiency with pro<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Proficiency with programming languages (e.g., Python, Java).
-                    Experience with machine learning frameworks (e.g., TensorFlow, PyTorch).
-                    Strong understanding of algorithms and data structures.
-                    Ability to preprocess and analyze data.
-                    Knowledge of cloud services for AI/ML (e.g., AWS SageMaker, Google AI).
-                    Problem-solving skills and ability to work in a team.
-                    ">... more</a></td>
-                    <td>Python, Java, AI</td>
-                    <td><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td>Develops and impleme<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" 
-                    data-bs-title="Develops and implements artificial intelligence and machine learning solutions.">... more</a></td>
-                    <td>2024-04-03 21:45:07</td>
-                    <td>
-                    <div class="ms-3 d-flex flex-row">
-                    <a href="tables-job-edit.html"><button type="button" class="btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button></a>
-                    <button class="ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
-                    </td>
-                    </tr>
-                  <tr>
-                    <td scope="row">20</td>
-                    <td class="role">UI/UX Designer</td>
-                    <td class="description">Strong understanding<a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Strong understanding of user-centered design principles. Proficiency with design tools (e.g., Sketch, Adobe XD, Figma). Ability to create wireframes, prototypes, and user flows. Experience with usability testing and user research. Excellent communication and collaboration skills. Attention to detail and creative problem-solving skills.">... more</a></td>
-                    <td class="skills">UX/UI, Figma</td>
-                    <td class="link"><a href="https://www.topcv.vn/viec-lam-it" target="_blank">https://www.topcv.vn/viec-lam-it</a></td>
-                    <td class="focus">Focuses on creating <a class="text-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="Focuses on creating intuitive and aesthetically pleasing user interfaces and experiences.">... more</a></td>
-                    <td class="timestamp">2024-04-03 21:45:07</td>
-                    <td>
-                        <div class="ms-3 d-flex flex-row">
-                            <button type="button" class="editBtn btn btn-primary btn-sm" ><i class="bi bi-pencil-square"></i></button>
-                            <button class="deleteBtn ms-2 btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
-                        </div>
                     </td>
                   </tr>
                 </tbody>
@@ -854,7 +442,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="deleteModalBtn" type="button" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
+          <button id="deleteModalBtn" onclick="confirmDel()" type="button" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </div>
@@ -863,14 +451,14 @@
 
   <!-- Toast -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true" ata-bs-delay="3000">
+    <div id="deleteToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" ata-bs-delay="3000">
       <div class="toast-header">
         <img src="../admin/img/avatar.png" class="avatar-sm rounded me-2" alt="...">
         <strong class="me-auto">Nguyen Hong Sac</strong>
         <small>1 mins ago</small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body" id="deleteModalContent">
+      <div class="toast-body" id="deleteToastContent">
         Delete job successful!
       </div>
     </div>
@@ -900,20 +488,7 @@
   <!-- Template Main JS File -->
   <script src="../admin/js/main.js"></script>
   <script src="../admin/js/custom.js"></script>
-
-  <!-- In file script -->
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('deleteModalBtn');
-
-    form.addEventListener('click', function() {
-      //Show toast when click
-        var toastElement = document.getElementById('liveToast2');
-        var toast = bootstrap.Toast.getOrCreateInstance(toastElement);
-        toast.show();
-      });
-    });
-   </script>
+  <script src="../admin/js/table-job.js"></script>
 
 </body>
 

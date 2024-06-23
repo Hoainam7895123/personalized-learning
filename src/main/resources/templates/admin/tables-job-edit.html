@@ -10,43 +10,38 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../admin/img/logo.png" rel="icon">
-  <link href="../admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link th:href="@{/admin/img/logo.png}" rel="icon">
+  <link th:href="@{/admin/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../admin/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../admin/css/bootstrap-icons.css" rel="stylesheet">
-  <link href="../admin/css/boxicons.min.css" rel="stylesheet">
-  <link href="../admin/css/quill.snow.css" rel="stylesheet">
-  <link href="../admin/css/quill.bubble.css" rel="stylesheet">
-  <link href="../admin/css/remixicon.css" rel="stylesheet">
-  <link href="../admin/css/simple-datatables/style.css" rel="stylesheet">
+  <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/quill.snow.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/quill.bubble.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/remixicon.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/simple-datatables/style.css}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../admin/css/style.css" rel="stylesheet">
-  <link href="../admin/css/custom.css" rel="stylesheet">
+  <link th:href="@{/admin/css/style.css}" rel="stylesheet">
+  <link th:href="@{/admin/css/job-custom.css}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
-
+	<!-- ======== response ========= -->
+	<input id="editResponse" type="hidden" th:attr="value=${editResponse == null ? '' : editResponse}">
+	
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="../admin/img/logo.png" alt="">
+        <img th:src="@{/admin/img/logo.png}" alt="">
         <span class="d-none d-lg-block">Admin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -161,7 +156,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-1.jpg" alt="" class="rounded-circle">
+                <img th:src="@{/admin/img/messages-1.jpg}" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -175,7 +170,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img th:src="@{/admin/img/messages-2.jpg}" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -189,7 +184,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/../admin/img/messages-3.jpg" alt="" class="rounded-circle">
+                <img th:src="@{/admin/img/messages-3.jpg}" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -212,7 +207,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../admin/img/avatar.png" alt="Profile" class="rounded-circle">
+            <img th:src="@{/admin/img/avatar.png}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">H. Sac</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -288,17 +283,17 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-job.html">
+            <a th:href="@{'/admin/job'}">
               <i class="bi bi-circle"></i><span>List</span>
             </a>
           </li>
           <li>
-            <a href="tables-job-add.html">
+            <a th:href="@{'/admin/job/add'}">
               <i class="bi bi-circle"></i><span>Add new</span>
             </a>
           </li>
           <li>
-            <a href="tables-job-edit.html" class="active">
+            <a th:href="@{'/admin/job/edit?id=0'}" class="active">
               <i class="bi bi-circle"></i><span>Edit</span>
             </a>
           </li>
@@ -377,11 +372,11 @@
         <div class="col-xl-4">
 
           <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" th:if="${editJob}">
 
-              <img src="../admin/img/job.jpg" alt="Profile" class="rounded-circle">
-              <h2 class="fs-4 text-center">Software Developer/Engineer</h2>
-              <h3 class="fs-6 text-center">Designs, develops, tests, and maintains software applications.</h3>
+              <img th:src="@{/admin/img/job.jpg}" alt="Profile" class="rounded-circle">
+              <h2 class="fs-4 text-center" th:text="${editJob.name}">Software Developer/Engineer</h2>
+              <h3 class="fs-6 text-center" th:text="${editJob.require}">Designs, develops, tests, and maintains software applications.</h3>
               <div class="social-links d-flex flex-column">
                 <a href="https://topdev.vn/" target="_blank" class="topdev mt-2"><i class="bi bi-laptop me-2"></i>https://topdev.vn/</a>
                 <a href="https://github.com/" target="_blank" class="github mt-2"><i class="bi bi-github me-2"></i>https://github.com/</a>
@@ -419,7 +414,7 @@
               </ul>
               <div class="tab-content pt-2">
 
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                <div class="tab-pane fade show active profile-overview" id="profile-overview" th:if="${editJob}">
                   <h5 class="card-title">About</h5>
                   <p class="small fst-italic">Job information is crucial for every college student, as it represents not only an opportunity but also a significant source of learning motivation.</p>
 
@@ -427,37 +422,37 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Job Name</div>
-                    <div class="col-lg-9 col-md-8">Software Developer/Engineer</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.name}"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Description</div>
-                    <div class="col-lg-9 col-md-8">Designs, develops, tests, and maintains software applications.</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.description}"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Require</div>
-                    <div class="col-lg-9 col-md-8">Web Designer</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.require}"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Link</div>
-                    <div class="col-lg-9 col-md-8"><a href="https://www.linkedin.com/feed/" target="_blank">https://www.linkedin.com/feed/</a></div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.links}"><a href="https://www.linkedin.com/feed/" target="_blank">https://www.linkedin.com/feed/</a></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Employer</div>
-                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.employer}"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Offer</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.offer}"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Experienced Level</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.experienceLevel}"></div>
                   </div>
 
                 </div>
@@ -465,13 +460,14 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Job Edit Form -->
-                  <form id="editJobForm">
+                  <form id="editJobForm" class="needs-validation" novalidate th:if="${editJob}" th:object="${newEditJob}">
+                  	<input type="hidden" th:field="*{id}" th:attr="value=''+${editJob.id}">
                     <div class="row mb-3">
                       <label for="jobImg" class="col-md-4 col-lg-3 col-form-label">Job Images</label>
                       <div class="col-md-8 col-lg-9">
                         <div>
-                          <img src="../admin/img/job1.webp" alt="Job Img">
-                          <img src="../admin/img/job.jpg" alt="Job Img">
+                          <img th:src="@{/admin/img/job1.webp}" alt="Job Img">
+                          <img th:src="@{/admin/img/job.jpg}" alt="Job Img">
                         </div>
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new job image"><i class="bi bi-upload"></i></a>
@@ -483,37 +479,37 @@
                     <div class="row mb-3">
                       <label for="jobId" class="col-md-2 col-lg-2 col-form-label">Job Id</label>
                       <div class="col-md-1 col-lg-1">
-                        <input name="jobId" type="text" class="form-control" id="jobId" value="1" disabled>
+                        <input name="jobId" type="text" class="form-control" id="jobId" th:attr="value=''+${editJob.id}" disabled>
                       </div>
                       <label for="jobName" class="col-md-2 col-lg-2 col-form-label">Job Name</label>
                       <div class="col-md-7 col-lg-7">
-                        <input name="jobName" type="text" class="form-control" id="jobName" value="Software Developer/Engineer">
+                        <input name="jobName" type="text" class="form-control" id="jobName" th:field="*{name}" th:attr="value=''+${editJob.name}" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobDescription" class="col-md-4 col-lg-3 col-form-label">Description</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="jobDescription" class="form-control" id="jobDescription" style="height: 100px">Designs, develops, tests, and maintains software applications.</textarea>
+                        <textarea name="jobDescription" class="form-control" id="jobDescription" style="height: 100px" th:field="*{description}" th:text="${editJob.description}"></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobRequire" class="col-md-4 col-lg-3 col-form-label">Require</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="jobRequire" class="form-control" id="jobRequire" style="height: 100px">Designs, develops, tests, and maintains software applications.</textarea>
+                        <textarea name="jobRequire" class="form-control" id="jobRequire" style="height: 100px"th:text="${editJob.require}" th:field="*{require}"  require></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="jobLink" class="col-md-4 col-lg-3 col-form-label">Link</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="jobLink" class="form-control" id="jobLink" style="height: 70px">Designs, develops, tests, and maintains software applications.</textarea>
+                        <textarea name="jobLink" class="form-control" id="jobLink" style="height: 70px" th:field="*{links}" th:text="${editJob.links}"></textarea>
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-primary">Save Changes</button>
+                      <button type="button" onclick="preeditJob1(this.form)" class="btn btn-primary">Save Changes</button>
                     </div>
                   </form><!-- End job Edit Form -->
 
@@ -521,7 +517,7 @@
 
                 <div class="tab-pane fade pt-3" id="profile-settings">
 
-                  <form>
+                  <form class="needs-validation" novalidate>
 
                     <div class="row mb-3">
                       <label for="jobName" class="col-md-4 col-lg-3 col-form-label">Notifications</label>
@@ -554,7 +550,7 @@
                     </div>
 
                     <div class="text-center">
-                      <button type="button" data-bs-toggle="modal" data-bs-target="confirmModal" class="btn btn-primary">Save Changes</button>
+                      <button type="button" data-bs-toggle="modal" data-bs-target="editModal" class="btn btn-primary">Save Changes</button>
                     </div>
                   </form><!-- End settings Form -->
 
@@ -562,7 +558,7 @@
 
                 <div class="tab-pane fade pt-3" id="job-change-employer">
                   <!-- Change Employer Form -->
-                  <form method="post">
+                  <form method="post" class="needs-validation" novalidate>
 
                     <div class="row mb-3">
                       <label for="jobEmployer" class="col-md-4 col-lg-3 col-form-label">Employer</label>
@@ -586,7 +582,7 @@
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change</button>
+                      <button type="submit" onclick="preeditJob2(this.form)" class="btn btn-primary">Change</button>
                     </div>
                   </form><!-- End Change Employer Form -->
 
@@ -603,7 +599,7 @@
   </main>
   
   <!-- confirm modal -->
-  <div class="modal fade" id="confirmModal" data-bs-backdrop="static" tabindex="-1">
+  <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -612,7 +608,7 @@
         </div>
         <div class="modal-body">
           <div class="d-flex my-3">
-            Are you sure to edit this?
+            Are you sure to edit?
           </div>
         </div>
         <div class="modal-footer">
@@ -625,14 +621,14 @@
 
   <!-- Toast -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="editJobToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" ata-bs-delay="3000">
+    <div id="editToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" ata-bs-delay="3000">
       <div class="toast-header">
-        <img src="../admin/img/avatar.png" class="avatar-sm rounded me-2" alt="...">
+        <img th:src="@{/admin/img/avatar.png}" class="avatar-sm rounded me-2" alt="...">
         <strong class="me-auto">Nguyen Hong Sac</strong>
         <small>1 mins ago</small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body">
+      <div class="toast-body" id="editToastContent">
         Edit job successful!
       </div>
     </div>
@@ -650,63 +646,18 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../admin/js/apexcharts.min.js"></script>
-  <script src="../admin/js/bootstrap.bundle.min.js"></script>
-  <script src="../admin/js/chart.umd.js"></script>
-  <script src="../admin/js/echarts.min.js"></script>
-  <script src="../admin/js/quill.min.js"></script>
-  <script src="../admin/js/simple-datatables.js"></script>
-  <script src="../admin/js/tinymce.min.js"></script>
+  <script th:src="@{/admin/js/apexcharts.min.js}"></script>
+  <script th:src="@{/admin/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/admin/js/chart.umd.js}"></script>
+  <script th:src="@{/admin/js/echarts.min.js}"></script>
+  <script th:src="@{/admin/js/quill.min.js}"></script>
+  <script th:src="@{/admin/js/simple-datatables.js}"></script>
+  <script th:src="@{/admin/js/tinymce.min.js}"></script>
 
   <!-- Template Main JS File -->
-  <script src="../admin/js/main.js"></script>
-  <script src="../admin/js/custom.js"></script>
-  <script>
-    "use strict";
-
-    async function sendData(form) {
-    // Construct a FormData instance
-    const formData = new FormData(form);
-  
-    formData.append("test", "Pomegranate");
-  
-    // Add a file
-    // const selection = await window.showOpenFilePicker();
-    // if (selection.length > 0) {
-    //   const file = await selection[0].getFile();
-    //   formData.append("file", file);
-    // }
-    try {
-      const response = await fetch("https://example.org/post", {
-        method: "POST",
-        body: formData, //Data as body request
-      });
-      console.log(await response.json());
-    } catch (e) {
-      console.error(e);
-    }
-}
-
-
-function editJob() {
-    const fn = document.getElementById("editJobForm");
-
-    fn.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const modal = document.getElementById("confirmModal");
-        const addModal = bootstrap.Modal.getOrCreateInstance(modal);
-        addModal.hide(); // Hide modal
-
-        await sendData(fn);
-
-        var toastElement = document.getElementById('editJobToast');
-        var toast = bootstrap.Toast.getOrCreateInstance(toastElement);
-        toast.show();
-    });
-    fn.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-  };
-  </script>
+  <script th:src="@{/admin/js/main.js}"></script>
+  <script th:src="@{/admin/js/custom.js}"></script>
+  <script th:src="@{/admin/js/table-job.js}"></script>
 
 </body>
 

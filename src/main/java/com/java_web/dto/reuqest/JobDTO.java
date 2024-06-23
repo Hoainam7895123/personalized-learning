@@ -10,7 +10,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class JobDTO {
-	
+	private Integer id;
 	private String name;
 	private String require;
 	private String links;
@@ -26,4 +26,5 @@ public class JobDTO {
 	private String title;
 	private String experienceLevel;
 	private String employer;
+	private String image;
 }
