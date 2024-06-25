@@ -23,6 +23,6 @@ public class TodoListHomePageController {
         model.addAttribute("todoLists", todoListDTOS);
         model.addAttribute("newTodo", new TodoListDTO()); // Thêm đối tượng TodoListDTO mới để binding form
         model.addAttribute("userId", userId);
-        return "index";
+        return "todolist";
     }
 }

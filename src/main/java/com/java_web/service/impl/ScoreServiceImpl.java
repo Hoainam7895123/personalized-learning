@@ -28,10 +28,10 @@ public class ScoreServiceImpl implements ScoreService{
 		List<Score> rawList = scoreRepository.findByUser(u);
 
 		rawList.forEach(item -> {
-			if (item.getValue() != null) {
+			if (item.getScore() != null) {
 				ScoreDTO i = new ScoreDTO();
 				i.setCourseName(item.getCourseName());
-				i.setScoreValue(item.getValue());
+				i.setScoreValue(item.getScore().floatValue());
 				
 				list.add(i);
 			}

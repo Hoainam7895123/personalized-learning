@@ -69,3 +69,7 @@
 .academicTranscript span:first-child{
     margin-right: 30px;
 }
+/* For compatible job */
+.compatible-rate {
+    margin: auto;
+}

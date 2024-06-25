@@ -1,5 +1,7 @@
 package com.java_web.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,16 +22,12 @@ public class Score {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="score_id")
 	private Integer id;
-
-	@Column(name="sub_id")
-	private Integer sub_id;
-	
 	@Column(name="score_times")
 	private Integer times;
 	@Column(name="score_type")
 	private String type;
 	@Column(name="score_value")
-	private Float value;
+	private BigDecimal score;
 	@Column(name="score_note")
 	private String note;
 	@Column(name="score_created_time")
@@ -46,4 +44,8 @@ public class Score {
 	@ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "sub_id")
+    private Subject subject;
 }

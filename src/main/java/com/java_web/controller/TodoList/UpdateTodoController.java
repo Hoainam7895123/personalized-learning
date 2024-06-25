@@ -60,6 +60,7 @@ public class UpdateTodoController {
     public String updateCategory(@RequestParam("id") Integer todoId,
                                  @RequestParam("date") Date date,
                                  @RequestParam("userId") Integer userId,
+
                                  RedirectAttributes redirectAttributes) {
         if (todoListService.updateDueDate(todoId, date)) {
             redirectAttributes.addFlashAttribute("updateDueDate", true);
@@ -71,14 +72,20 @@ public class UpdateTodoController {
 
     @PostMapping("/update-status")
     public String updateStatus(@RequestParam("id") Integer todoId,
-                                 @RequestParam("status") String status,
-                                 @RequestParam("userId") Integer userId,
-                                 RedirectAttributes redirectAttributes) {
+                               @RequestParam("status") String status,
+                               @RequestParam(value = "userId", required = false) Integer userId,
+                               @RequestParam("source") String source,
+                               RedirectAttributes redirectAttributes) {
         if (todoListService.updateStatus(todoId, status)) {
             redirectAttributes.addFlashAttribute("updateStatus", true);
         } else {
             redirectAttributes.addFlashAttribute("updateStatus", false);
         }
-        return "redirect:/page/todo-list?userId=" + userId; // Redirect về trang danh sách công việc với userId
+
+        if ("index".equals(source)) {
+            return "redirect:/"; // Redirect về trang index
+        } else {
+            return "redirect:/page/todo-list?userId=" + userId; // Redirect về trang danh sách công việc với userId
+        }
     }
 }

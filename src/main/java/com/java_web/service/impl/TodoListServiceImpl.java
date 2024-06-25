@@ -79,7 +79,7 @@ public class TodoListServiceImpl implements TodoListService {
     }
 
 
-//    ====================== Update ===================
+    // ====================== Update ===================
     @Override
     public boolean updateTitle(Integer todoId, String title) {
         if (!todoListRepository.existsByTitle(title)) {
@@ -120,6 +120,15 @@ public class TodoListServiceImpl implements TodoListService {
     public boolean updateStatus(Integer todoId, String status) {
         TodoList todoList = todoListRepository.findById(todoId).get();
         todoList.setStatus(status);
+        todoListRepository.save(todoList);
+        return true;
+    }
+
+    // update at Home Page from doing -> done
+    @Override
+    public boolean updateStatusAtHomePage(Integer todoId) {
+        TodoList todoList = todoListRepository.findById(todoId).get();
+        todoList.setStatus("DONE");
         todoListRepository.save(todoList);
         return true;
     }

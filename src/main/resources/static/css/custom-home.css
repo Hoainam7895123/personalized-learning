@@ -83,9 +83,93 @@
     width: 600px;
 }
 
+<<<<<<< HEAD
 /* Mobile card
 --------------------------*/
 @media (max-width: 1200px) {
+=======
+.todo-list {
+    .todo-header {
+        text-align: center;
+    }
+
+    .todo-search {
+        width: 100%;
+        padding: 10px 20px;
+        border-radius: 50px;
+        border: none;
+        background-color: #eceeef;
+    }
+
+    .todo-status {
+        margin-top: 15px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        margin-left: 5px;
+        border-bottom: 1px solid #e2e2e2;
+        span {
+            margin-right: 15px;
+        }
+
+        a {
+            color: black;
+        }
+
+        span.active {
+            a {
+                color: #47abff;
+                text-decoration:underline;
+                text-decoration-thickness: 2px; /* Độ dày của gạch chân */
+                text-underline-offset: 5px; /* Khoảng cách giữa chữ và gạch chân */
+            }
+        }
+    }
+
+    .todo {
+        margin: 0px 0 10px 5px;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #e2e2e2;
+
+        .icon-complete {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #cdcdcd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            background-color: #fff;
+            i {
+                color: #fff;
+            }
+        }
+
+        .checkmark {
+            background-color: #47abff;
+            border: none;
+        }
+
+        .todo-title {
+            margin-left: 15px;
+        }
+
+        .todo-calendar {
+            margin-left: auto;
+            font-size: 14px;
+            i {
+                margin-left: 5px;
+            }
+        }
+    }
+}
+
+/* Mobile card
+--------------------------*/
+@media (max-width: 768px) {
+>>>>>>> origin
     .hero.section {
         display: flex;
         flex-direction: column;
@@ -114,11 +198,17 @@
     }
     .mcard {
         order: 1;
+<<<<<<< HEAD
         align-self: auto;
     }
     .content-card {
         order: 3;
         align-self: auto;
+=======
+    }
+    .content-card {
+        order: 3;
+>>>>>>> origin
     }
 
     /* Hide main card */
