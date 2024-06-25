@@ -156,16 +156,19 @@ public class JobServiceImpl implements JobService{
 	@Override
 	public boolean saveImage(MultipartFile file, JobDTO job)	{
 		try {
-			String uploadDir = "src/main/resources/static/admin/img/job";
-			if (!Files.exists(Paths.get(uploadDir))) {
-	            Files.createDirectories(Paths.get(uploadDir)); //Created dir if not exist
-	        }
-			String fileName = file.getOriginalFilename();
-	        Path filePath = Paths.get(uploadDir, fileName);
-	        Files.write(filePath, file.getBytes());
+			String fileName = "";
+			
+			if (file != null) {
+				String uploadDir = "src/main/resources/static/admin/img/job";
+				if (!Files.exists(Paths.get(uploadDir))) {
+		            Files.createDirectories(Paths.get(uploadDir)); //Created dir if not exist
+		        }
+				fileName = file.getOriginalFilename();
+		        Path filePath = Paths.get(uploadDir, fileName);
+		        Files.write(filePath, file.getBytes());
+			}
 	        
 	        job.setImage(fileName);
-	        jobRepository.save(mapToEntity(job));
 	        
 	        return true;
 		} catch (IOException e) {

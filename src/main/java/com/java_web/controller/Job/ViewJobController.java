@@ -28,4 +28,16 @@ public class ViewJobController {
 		
 		return "admin/tables-job";
 	}
+	
+	@GetMapping("/job")
+	public String viewJobUser(Model model) {
+		List<JobDTO> jobList = jobService.getAllJob();
+		if (!jobList.isEmpty()) {
+			model.addAttribute("jobList", jobList);
+		} else {
+			model.addAttribute("message", "Table job is empty.");
+		}
+		
+		return "job";
+	}
 }

@@ -40,7 +40,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a th:href="@{/admin}" class="logo d-flex align-items-center">
         <img th:src="@{/admin/img/logo.png}" alt="">
         <span class="d-none d-lg-block">Admin</span>
       </a>
@@ -271,7 +271,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" th:href="@{/admin}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -360,7 +360,7 @@
       <h1>Data Job</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
           <li class="breadcrumb-item">Tables Job</li>
           <li class="breadcrumb-item active">Add</li>
         </ol>
@@ -394,7 +394,7 @@
                     <div class="row mb-3">
                       <label for="jobImage" class="col-md-3 col-lg-2 col-form-label">Job Image</label>
                       <div class="col-md-9 col-lg-10">
-                        <img th:src="@{/admin/img/job.jpg}" alt="Job Img" id="jobImageSrc">
+                        <img th:src="@{/admin/img/job/job.jpg}" alt="Job Img" id="jobImageSrc">
                         <div class="pt-2">
                           <a onclick="document.getElementById('jobImg').click();" class="btn btn-primary btn-sm" title="Upload new job image"><i class="bi bi-upload"></i>
                           <input type="file" name="jobImg" id="jobImg" class="d-none" onchange="previewImage(event)">
@@ -424,6 +424,13 @@
                         <textarea name="jobRequire" class="form-control" id="jobRequire" style="height: 100px" required th:field="*{require}"></textarea>
                       </div>
                     </div>
+                    
+                    <div class="row mb-3">
+                      <label for="jobSkills" class="col-md-3 col-lg-2 col-form-label">Skills</label>
+                      <div class="col-md-9 col-lg-10">
+                        <textarea name="jobSkills" class="form-control" id="jobSkills" style="height: 100px" required th:field="*{skills}"></textarea>
+                      </div>
+                    </div>
 
                     <div class="row mb-3">
                       <label for="jobLink" class="col-md-3 col-lg-2 col-form-label">Link</label>
@@ -449,7 +456,7 @@
                     <div class="row mb-3">
                       <label for="jobLevel" class="col-md-3 col-lg-2 col-form-label">Experienced Level</label>
                       <div class="col-md-9 col-lg-10">
-                        <input name="jobLevel" type="password" class="form-control" id="jobLevel" th:field="*{experienceLevel}">
+                        <input name="jobLevel" type="text" class="form-control" id="jobLevel" th:field="*{experienceLevel}">
                       </div>
                     </div>
 

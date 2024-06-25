@@ -1,5 +1,7 @@
 package com.java_web.controller.Job;
 
+import java.io.IOException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,23 +28,27 @@ public class AddJobController {
 	}
 	@PostMapping("/admin/job/add")
 	public String addJob(@ModelAttribute("newJob") JobDTO newJob, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-			@RequestParam("jobImg") MultipartFile jobImg) {
-		System.out.println( jobImg+ " --- " +jobImg.toString());
+			@RequestParam(name="jobImg", required = false) MultipartFile jobImg) {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("addResponse", false);
 			return "admin/tables-job-add";
 		}
-		if (jobService.addJob(newJob)) {
-			try {
-				jobService.saveImage(jobImg, newJob);
-				System.out.println("> Save image: done");
-			} catch(Exception e) {
-				
+		try {
+			if (jobImg != null) {
+				newJob.setImage("");
 			}
-			redirectAttributes.addFlashAttribute("addResponse", true);
-		} else {
-			redirectAttributes.addFlashAttribute("addResponse", false);
+			if (jobService.saveImage(jobImg, newJob)) {
+				System.out.println("> Save image: done");
+				if (jobService.addJob(newJob)) {
+					redirectAttributes.addFlashAttribute("addResponse", true);
+				} else {
+					redirectAttributes.addFlashAttribute("addResponse", false);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 		return "redirect:/admin/job/add";
 	}
 	

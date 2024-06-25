@@ -40,7 +40,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a th:href="@{/admin}" class="logo d-flex align-items-center">
         <img th:src="@{/admin/img/logo.png}" alt="">
         <span class="d-none d-lg-block">Admin</span>
       </a>
@@ -271,7 +271,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" th:href="@{/admin}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -360,7 +360,7 @@
       <h1>Data Job</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
           <li class="breadcrumb-item">Tables Job</li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
@@ -374,7 +374,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" th:if="${editJob}">
 
-              <img th:src="@{/admin/img/job.jpg}" alt="Profile" class="rounded-circle">
+              <img th:src="@{'/admin/img/job/'+${editJob.image}}" alt="Profile" class="rounded-circle">
               <h2 class="fs-4 text-center" th:text="${editJob.name}">Software Developer/Engineer</h2>
               <h3 class="fs-6 text-center" th:text="${editJob.require}">Designs, develops, tests, and maintains software applications.</h3>
               <div class="social-links d-flex flex-column">
@@ -434,6 +434,11 @@
                     <div class="col-lg-3 col-md-4 label">Require</div>
                     <div class="col-lg-9 col-md-8" th:text="${editJob.require}"></div>
                   </div>
+                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Skills</div>
+                    <div class="col-lg-9 col-md-8" th:text="${editJob.skills}"></div>
+                  </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Link</div>
@@ -466,12 +471,13 @@
                       <label for="jobImg" class="col-md-4 col-lg-3 col-form-label">Job Images</label>
                       <div class="col-md-8 col-lg-9">
                         <div>
-                          <img th:src="@{/admin/img/job1.webp}" alt="Job Img">
-                          <img th:src="@{/admin/img/job.jpg}" alt="Job Img">
+                          <img th:src="@{'/admin/img/job/'+${editJob.image}}" alt="Job Img" id="jobImageSrc">
                         </div>
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new job image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove job image"><i class="bi bi-trash"></i></a>
+                          <a onclick="document.getElementById('jobImg').click();" class="btn btn-primary btn-sm" title="Upload new job image"><i class="bi bi-upload"></i>
+                          <input type="file" name="jobImg" id="jobImg" class="d-none" onchange="previewImage(event)">
+                          </a>
+                          <a onclick="removeImage()" class="btn btn-danger btn-sm" title="Remove job image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
@@ -498,6 +504,13 @@
                       <label for="jobRequire" class="col-md-4 col-lg-3 col-form-label">Require</label>
                       <div class="col-md-8 col-lg-9">
                         <textarea name="jobRequire" class="form-control" id="jobRequire" style="height: 100px"th:text="${editJob.require}" th:field="*{require}"  require></textarea>
+                      </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                      <label for="jobSkills" class="col-md-4 col-lg-3 col-form-label">Skills</label>
+                      <div class="col-md-8 col-lg-9">
+                        <textarea name="jobSkills" class="form-control" id="jobSkills" style="height: 100px"th:text="${editJob.skills}" th:field="*{skills}"  require></textarea>
                       </div>
                     </div>
 
@@ -577,7 +590,7 @@
                     <div class="row mb-3">
                       <label for="jobLevel" class="col-md-4 col-lg-3 col-form-label">Experienced Level</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="jobLevel" type="password" class="form-control" id="jobLevel">
+                        <input name="jobLevel" type="text" class="form-control" id="jobLevel">
                       </div>
                     </div>
 
