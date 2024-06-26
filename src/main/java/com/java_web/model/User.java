@@ -69,6 +69,9 @@ public class User implements UserDetails {
     @Column(name = "user_deleted")
     private Byte deleted;
 
+    @OneToOne(mappedBy = "user")
+    private StudyCredit studyCredit;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TodoList> todoLists = new ArrayList<>();
 
