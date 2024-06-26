@@ -52,4 +52,7 @@ public class Subject {
     @ManyToOne
     @JoinColumn(name = "smt_id")
     private Semester semesters;
+    
+    @Column(name = "course_id")
+    private Integer courseId;
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,8 +165,8 @@ public class JobServiceImpl implements JobService{
 		            Files.createDirectories(Paths.get(uploadDir)); //Created dir if not exist
 		        }
 				fileName = file.getOriginalFilename();
-		        Path filePath = Paths.get(uploadDir, fileName);
-		        Files.write(filePath, file.getBytes());
+		        Path filePath = Paths.get(uploadDir).resolve(fileName);
+		        Files.write(filePath, file.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 			}
 	        
 	        job.setImage(fileName);

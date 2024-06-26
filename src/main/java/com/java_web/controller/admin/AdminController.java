@@ -29,12 +29,16 @@ public class AdminController {
 		List<String> userScore = new ArrayList<>();
 		List<Integer> total = new ArrayList<>();
 		
-		DecimalFormat df = new DecimalFormat("#.##");
-		list.forEach(item -> {
-			user.add(item.getId()+" "+item.getName());
-			userScore.add(df.format(item.getScore()));
-			total.add(item.getTotal());
-		});
+		try {
+			DecimalFormat df = new DecimalFormat("#.##");
+			list.forEach(item -> {
+				user.add(item.getId()+" "+item.getName());
+				userScore.add(df.format(item.getScore()));
+				total.add(item.getTotal());
+			});
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("user", user);
 		model.addAttribute("score", userScore);
 		model.addAttribute("total", total);

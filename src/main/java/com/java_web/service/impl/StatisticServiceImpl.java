@@ -27,7 +27,7 @@ public class StatisticServiceImpl implements StatisticService{
 			
 			int id = (Integer) rawItem[0];
 			String name = (String) rawItem[1];
-			Double rscore = (Double) rawItem[2];
+			BigDecimal rscore = (BigDecimal) rawItem[2];
 			float score = rscore.floatValue();
 			Long rtotal = (Long) rawItem[3];
 			int total = rtotal.intValue();
