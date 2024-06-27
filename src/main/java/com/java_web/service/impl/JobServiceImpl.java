@@ -2,6 +2,7 @@ package com.java_web.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,11 +10,17 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java_web.dto.response.JobResponse;
 import com.java_web.dto.reuqest.JobDTO;
+import com.java_web.dto.reuqest.JobDetailDTO;
+import com.java_web.dto.reuqest.StatDTO;
 import com.java_web.model.Job;
+import com.java_web.model.JobDetail;
+import com.java_web.repository.JobDetailRepository;
 import com.java_web.repository.JobRepository;
 import com.java_web.service.JobService;
 
@@ -34,7 +41,6 @@ public class JobServiceImpl implements JobService{
 		job.setDescription(jobDTO.getDescription());
 		job.setCreatedTime(jobDTO.getCreatedTime());
 		job.setModifiedTime(jobDTO.getModifiedTime());
-		job.setDeleted(jobDTO.getDeleted());
 		job.setSkills(jobDTO.getSkills());
 		job.setResponsibilities(jobDTO.getResponsibilities());
 		job.setQualifications(jobDTO.getQualifications());
@@ -58,7 +64,6 @@ public class JobServiceImpl implements JobService{
 		jobDTO.setDescription(job.getDescription());
 		jobDTO.setCreatedTime(job.getCreatedTime());
 		jobDTO.setModifiedTime(job.getModifiedTime());
-		jobDTO.setDeleted(job.getDeleted());
 		jobDTO.setSkills(job.getSkills());
 		jobDTO.setResponsibilities(job.getResponsibilities());
 		jobDTO.setQualifications(job.getQualifications());
@@ -122,7 +127,6 @@ public class JobServiceImpl implements JobService{
 		job.setDescription(jobDTO.getDescription());
 		job.setCreatedTime(jobDTO.getCreatedTime());
 		job.setModifiedTime(jobDTO.getModifiedTime());
-		job.setDeleted(jobDTO.getDeleted());
 		job.setSkills(jobDTO.getSkills());
 		job.setResponsibilities(jobDTO.getResponsibilities());
 		job.setQualifications(jobDTO.getQualifications());
@@ -178,5 +182,66 @@ public class JobServiceImpl implements JobService{
         
         return false;
 	}
-	
+    private final JobRepository statisticRepository;
+    private final JobDetailRepository jobDetailRepository;
+
+    @Override
+    public List<StatDTO> getAvgScore() {
+        List<StatDTO> list = new ArrayList<StatDTO>();
+
+        List<Object[]> rawList = statisticRepository.getAvgScore();
+        for (Object[] rawItem : rawList) {
+
+            int id = (Integer) rawItem[0];
+            String name = (String) rawItem[1];
+            BigDecimal rscore = (BigDecimal) rawItem[2];
+            float score = rscore.floatValue();
+            Long rtotal = (Long) rawItem[3];
+            int total = rtotal.intValue();
+
+            StatDTO item = new StatDTO(id, name, score, total);
+
+            list.add(item);
+        }
+
+        return list;
+    }
+
+    public Page<JobResponse> getJobs(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Job> jobPage = statisticRepository.findAll(pageable);
+
+        return jobPage.map(this::convertToJobResponse);
+    }
+
+    private JobResponse convertToJobResponse(Job job) {
+        JobDTO jobDTO = new JobDTO();
+        jobDTO.setId(job.getId());
+        jobDTO.setSkills(job.getSkills());
+        jobDTO.setName(job.getName());
+        jobDTO.setLinks(job.getLinks());
+        jobDTO.setDescription(job.getDescription());
+        jobDTO.setRequire(job.getRequire());
+        // Gán các thuộc tính khác của JobDTO
+
+        JobDetail jobDetail = jobDetailRepository.findById(job.getId()).get();
+        System.out.println(jobDetail);
+        JobDetailDTO jobDetailDTO = new JobDetailDTO();
+        if (jobDetail != null) {
+            jobDetailDTO.setId(jobDetail.getId());
+            jobDetailDTO.setCoding(jobDetail.getCoding());
+            jobDetailDTO.setInteract(jobDetail.getInteract());
+            jobDetailDTO.setReliability(jobDetail.getReliability());
+            jobDetailDTO.setDesigning(jobDetail.getDesigning());
+            jobDetailDTO.setLogicalThinking(jobDetail.getLogicalThinking());
+            // Gán các thuộc tính khác của JobDetailDTO
+        }
+        System.out.println(jobDetailDTO.getId());
+
+        JobResponse jobResponse = new JobResponse();
+        jobResponse.setJobDTO(jobDTO);
+        jobResponse.setJobDetailDTO(jobDetailDTO);
+
+        return jobResponse;
+    }
 }

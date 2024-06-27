@@ -83,11 +83,9 @@
     width: 600px;
 }
 
-<<<<<<< HEAD
 /* Mobile card
 --------------------------*/
 @media (max-width: 1200px) {
-=======
 .todo-list {
     .todo-header {
         text-align: center;
@@ -165,11 +163,10 @@
         }
     }
 }
-
+}
 /* Mobile card
 --------------------------*/
 @media (max-width: 768px) {
->>>>>>> origin
     .hero.section {
         display: flex;
         flex-direction: column;
@@ -196,19 +193,16 @@
         order: 2;
         margin-bottom: 1rem;
     }
+    #studycreditChart{
+        align-self: center;
+    }
     .mcard {
         order: 1;
-<<<<<<< HEAD
         align-self: auto;
     }
     .content-card {
         order: 3;
         align-self: auto;
-=======
-    }
-    .content-card {
-        order: 3;
->>>>>>> origin
     }
 
     /* Hide main card */
@@ -238,4 +232,3 @@
         justify-content: center;
     }
 }
-

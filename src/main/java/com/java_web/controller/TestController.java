@@ -2,13 +2,11 @@ package com.java_web.controller;
 
 import com.java_web.dto.reuqest.TodoListDTO;
 import com.java_web.dto.reuqest.UserDTO;
-import com.java_web.model.Score;
-import com.java_web.model.StudyCredit;
-import com.java_web.model.TodoList;
-import com.java_web.model.User;
+import com.java_web.model.*;
 import com.java_web.repository.StudyCreditRepository;
 import com.java_web.repository.TodoListRepository;
 import com.java_web.repository.UserRepository;
+import com.java_web.service.CareerOrientationService;
 import com.java_web.service.SkillScoreService;
 import com.java_web.service.TodoListService;
 import com.java_web.service.UserService;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -75,5 +74,14 @@ public class TestController {
         decimalList.add(skillScoreService.calculateLogicalThinkingPoint(1));
         return decimalList;
     }
+
+    private final CareerOrientationService careerOrientationService;
+
+//    @GetMapping("/score/x")
+//    public List<Job> getScore() {
+//
+//        Map<Integer, BigDecimal> ca = careerOrientationService.calculateTheAppropriateScore(1);
+//        return careerOrientationService.getJobsById(ca);
+//    }
 
 }

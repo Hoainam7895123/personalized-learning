@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -16,11 +16,14 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
   <link href="css/aos.css" rel="stylesheet">
   <link href="css/glightbox.min.css" rel="stylesheet">
   <link href="css/swiper-bundle.min.css" rel="stylesheet">
@@ -56,19 +59,19 @@
             </a>
           </li><!-- End Search Icon-->
           
-          <li><a href="index.html" class="d-flex flex-column active">
+          <li><a th:href="@{/}" class="d-flex flex-column active">
             <i class="bi bi-house-door-fill"></i>
             <span>Trang chủ</span>
           </a></li>
-          <li><a href="todolist.html" class="d-flex flex-column">
+          <li><a th:href="@{/page/todo-list}" class="d-flex flex-column">
             <i class="bi bi-check2-circle"></i>
             <span>Việc cần làm</span>
           </a></li>
-          <li><a href="schedule.html" class="d-flex flex-column">
+          <li><a th:href="@{/schedule}" class="d-flex flex-column">
             <i class="bi bi-calendar"></i>
             <span>Lịch biểu</span>
           </a></li>
-          <li><a href="job.html" class="d-flex flex-column">
+          <li><a th:href="@{/jobs}" class="d-flex flex-column">
             <i class="bi bi-briefcase-fill"></i>
             <span>Công việc</span>
           </a></li>
@@ -82,6 +85,7 @@
             <div class="d-inline-flex align-items-center justify-content-center account-sub">
               <span>Tôi</span><i class="bi bi-caret-down-fill fs-6"></i>
             </div>
+
             </a>
             <div class="account rounded shadow p-3 mb-5 d-flex flex-column">
               <div class="d-flex flex-row">
@@ -92,7 +96,9 @@
 
                 </div>
               </div>
-              <div><hr></div>
+              <div>
+                <hr>
+              </div>
               <div>
                 <a href="#">
                 <i class="bi bi-person-gear"></i>
@@ -112,7 +118,6 @@
                 <i class="bi bi-question-circle-fill"></i>
 
                 <span>Trợ giúp</span></a>
-
               </div>
               <div>
                 <hr>
@@ -120,7 +125,6 @@
               <div>
                 <a href="">
                 <i class="bi bi-box-arrow-right"></i>
-
                 <span>Đăng xuất</span></a>
 
               </div>
@@ -151,22 +155,26 @@
                 </div>
               </a>
             </div>
-            <div><hr></div>
+            <div>
+              <hr>
+            </div>
             <div class="mobile-mcard">
-            <div class="mcard-item">
-              <a href="">
-                <i class="bi bi-book-fill"></i>
-                <span class="ms-2 fw-light">Study</span><br>
-                <span>Learn something new</span>
-              </a>
-            </div>
-            <div><hr></div>
-            <div class="mcard-item">
-              <a href="">
-                <i class="bi bi-bookmark-fill"></i>
-                <span class="ms-2 fw-light">Saved items</span>
-              </a>
-            </div>
+              <div class="mcard-item">
+                <a href="">
+                  <i class="bi bi-book-fill"></i>
+                  <span class="ms-2 fw-light">Study</span><br>
+                  <span>Learn something new</span>
+                </a>
+              </div>
+              <div>
+                <hr>
+              </div>
+              <div class="mcard-item">
+                <a href="">
+                  <i class="bi bi-bookmark-fill"></i>
+                  <span class="ms-2 fw-light">Saved items</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -174,7 +182,7 @@
         <div class="mobile-mcard showmore mb-3">
           <a href="" class="text-body-primary">Show more</a>
         </div>
-        
+
         <div class="card mcard2 shadow-sm">
           <div class="card-body">
             <div class="mcard-item-2 mb-1">
@@ -189,7 +197,9 @@
                 <span class="ms-2">Event</span>
               </a>
             </div>
-            <div><hr></div>
+            <div>
+              <hr>
+            </div>
             <div class="mcard-item-2 text-center">
               <a href="">
                 <span>Discover more</span>
@@ -197,105 +207,8 @@
             </div>
           </div>
         </div>
-        
+
       </div> <!-- /Main Card -->
-
-      <!-- Content -->
-      <div class="content-card container" data-aos="fade-up" data-aos-delay="100">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h6 class="card-title">Todo List</h6>
-          </div>
-        </div>
-      </div>
-
-      <!-- Side Card -->
-      <div class="scard container d-flex justify-content-end" data-aos="fade-left" data-aos-delay="100">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Study credit</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">Your path to academic excellence</h6>
-            <hr>
-            <div class="scard-item m-1 d-flex">
-              <i class="bi bi-laptop me-2"></i>
-              <span>Programming Skills</span>
-              <span class="scard-item-point ms-auto me-2">7.5</span>
-            </div>
-            <div class="scard-item m-1 d-flex">
-              <i class="bi bi-rulers me-2"></i>
-              <span>Design Skills</span>
-              <span class="scard-item-point ms-auto me-2">7</span>
-            </div>
-            <div class="scard-item m-1 d-flex">
-              <i class="bi bi-wechat me-2"></i>
-              <span>Interaction Skills</span>
-              <span class="scard-item-point ms-auto me-2">8</span>
-            </div>
-            <div class="scard-item m-1 d-flex">
-              <i class="bi bi-bar-chart-steps me-2"></i>
-              <span>Logical Thinking</span>
-              <span class="scard-item-point ms-auto me-2">8</span>
-            </div>
-            <div class="scard-item m-1 d-flex">
-              <i class="bi bi-shield-check me-2"></i>
-              <span>Reliability</span>
-              <span class="scard-item-point ms-auto me-2">9.5</span>
-            </div>
-            
-            <div id="studycreditChart" style="min-height: 200px;" class="scard-item echart m-1"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#studycreditChart")).setOption({
-                    legend: {
-                      data: []
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Lập trình',
-                          max: 100
-                        },
-                        {
-                          name: 'Thiết kế',
-                          max: 100
-                        },
-                        {
-                          name: 'Giao tiếp',
-                          max: 100
-                        },
-                        {
-                          name: 'Tin cậy',
-                          max: 100
-                        },
-                        {
-                          name: 'Logic',
-                          max: 100
-                        }
-                      ]
-                    },
-                    series: [{
-                      name: 'Study credit',
-                      type: 'radar',
-                      data: [{
-                          value: [44, 50, 66, 79, 10],
-                          name: 'Study Credit'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-          </div>
-        </div>
-      </div> <!-- /Side Card -->
-
-    </section><!-- /Hero Section -->
-
-    
-
-    <!-- About Section -->
-    <section id="about" class="about section">
 
       <!-- Todolist -->
       <div class="content-card container" data-aos="fade-up" data-aos-delay="100">
@@ -326,29 +239,10 @@
                 </div>
               </div>
             </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- /About Section -->
-
-    <!-- Clients Section -->
-    <section id="clients" class="clients section">
-
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div><!-- End Client Item -->
           </div>
         </div>
-      </div>
 
-      <!-- Kỹ năng -->
+      <!-- Side Card -->
       <div class="scard container d-flex justify-content-end" data-aos="fade-left" data-aos-delay="100">
         <div class="card shadow-sm">
           <div class="card-body">
@@ -381,6 +275,66 @@
               <span class="scard-item-point ms-auto me-2">9.5</span>
             </div>
             
+            <div id="studycreditChart" style="min-height: 200px;" class="scard-item echart m-1"></div>
+
+              <script th:inline="javascript">
+                document.addEventListener("DOMContentLoaded", () => {
+                	const programmingSkill = /*[[${programmingSkill}]]*/ 0;
+                    const designSkill = /*[[${designSkill}]]*/ 0;
+                    const logicalThinking = /*[[${logicalThinking}]]*/ 0;
+                    const interactionSkill = /*[[${interactionSkill}]]*/ 0;
+                    const reliability = /*[[${reliability}]]*/ 0;
+                    const rdata = [programmingSkill,designSkill,interactionSkill,reliability,logicalThinking];
+
+                console.log(programmingSkill, designSkill, logicalThinking, interactionSkill, reliability);
+                
+                  var budgetChart = echarts.init(document.querySelector("#studycreditChart")).setOption({
+                    legend: {
+                      data: []
+                    },
+                    radar: {
+                      // shape: 'circle',
+                      indicator: [{
+                          name: 'Lập trình',
+                          max: 20,
+                          color: '#3d4348'
+                        },
+                        {
+                          name: 'Thiết kế',
+                          max: 20,
+                          color: '#3d4348'
+                        },
+                        {
+                          name: 'Tương tác',
+                          max: 20,
+                          color: '#3d4348'
+                        },
+                        {
+                          name: 'Tin cậy',
+                          max: 20,
+                          color: '#3d4348'
+                        },
+                        {
+                          name: 'Logic',
+                          max: 20,
+                          color: '#3d4348'
+                        }
+                      ]
+                    },
+                    series: [{
+                      color: '#198754',
+                      name: 'Study credit',
+                      type: 'radar',
+                      
+                      data: [{
+                          value: rdata,
+                          name: 'Study Credit'
+                        }
+                      ]
+                    }]
+                  });
+                });
+              </script>
           </div>
         </div>
       </div> <!-- /Side Card -->
@@ -461,7 +415,8 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -469,6 +424,7 @@
   <!-- Vendor JS Files -->
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/aos.js"></script>
+  <script src="js/apexcharts.min.js"></script>
   <script src="js/glightbox.min.js"></script>
   <script src="js/swiper-bundle.min.js"></script>
   <script src="js/echarts.min.js"></script>

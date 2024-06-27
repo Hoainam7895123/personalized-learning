@@ -51,7 +51,10 @@ public class SecurityConfiguration {
                         .requestMatchers("/resources/css/**", "/resources/js/**").permitAll()
                         .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .logout(
                         logout -> logout
                                 .logoutUrl("/logout") // Đường dẫn URL cho việc logout

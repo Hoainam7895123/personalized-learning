@@ -18,24 +18,13 @@ import lombok.AllArgsConstructor;
 
 @SpringBootTest
 class PersonalizedLearningApplicationTests {
-	@Autowired
-	private SubjectService ss;
-	@Autowired
-	private SubjectRepository sr;
-	@Autowired
-	private ScoreRepository scr;
 
 	@Test
 	void contextLoads() {
 	}
 	@Test
 	void test() {
-		List<Subject> list = sr.findStudy(1, 1);
-		System.out.println(list.size());
-		list.forEach(item -> {
-			Score sc = scr.findBySub(1, item.getId());
-			System.out.println(sc.getId());
-		});
+
 		
 	}
 }

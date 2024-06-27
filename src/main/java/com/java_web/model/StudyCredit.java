@@ -1,9 +1,6 @@
 package com.java_web.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,4 +28,8 @@ public class StudyCredit {
     private String modifiedTime;
     @Column(name = "stc_notes")
     private String notes;
+
+    @OneToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 }

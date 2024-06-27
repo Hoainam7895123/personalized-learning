@@ -61,4 +61,33 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
 
+    @Override
+    public UserDTO getByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setFullName(user.getFullName());
+        userDTO.setBirthday(user.getBirthday());
+        userDTO.setGender(user.getGender());
+        userDTO.setMobilePhone(user.getMobilePhone());
+        userDTO.setHomePhone(user.getHomePhone());
+        userDTO.setOfficePhone(user.getOfficePhone());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setAddress(user.getAddress());
+        return userDTO;
+    }
+
+    @Override
+    public Integer countUser() {
+        List<User> userList = userRepository.findAll();
+        return userList.size();
+    }
+
+    @Override
+    public Integer getReliabilityByUserId(Integer id) {
+        return userRepository.findById(id).get().getStudyCredit().getReliability();
+    }
+
 }
