@@ -170,7 +170,8 @@ public class JobServiceImpl implements JobService{
 		        }
 				fileName = file.getOriginalFilename();
 		        Path filePath = Paths.get(uploadDir).resolve(fileName);
-		        Files.write(filePath, file.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+//		        System.out.println(filePath.toString());
+		        Files.write(filePath, file.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 			}
 	        
 	        job.setImage(fileName);

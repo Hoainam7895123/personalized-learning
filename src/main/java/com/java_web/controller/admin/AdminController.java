@@ -3,6 +3,7 @@ package com.java_web.controller.admin;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,14 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String dashboard(Model model) {
 		
+		// General
+		model.addAttribute("totalUser", statisticService.getTotalUser());
+		model.addAttribute("totalJob", statisticService.getTotalJob());
+		model.addAttribute("avgTotal", statisticService.getAvgTotal());
+		
+		// Avg score chart
 		List<StatDTO> list = statisticService.getAvgScore();
 		
-		List<Integer> userId = new ArrayList<>();
 		List<String> user = new ArrayList<>();
 		List<String> userScore = new ArrayList<>();
 		List<Integer> total = new ArrayList<>();
@@ -42,6 +48,17 @@ public class AdminController {
 		model.addAttribute("user", user);
 		model.addAttribute("score", userScore);
 		model.addAttribute("total", total);
+		
+		// Todo list chart
+		List<Long> todoTotal = new ArrayList<>();
+		List<String> todoMonth = new ArrayList<>();
+		Map<Integer, Long> todoMap = statisticService.getTodoPerMonth();
+		for (Map.Entry<Integer, Long> entry : todoMap.entrySet()) {
+			todoTotal.add(entry.getValue());
+			todoMonth.add("Tháng "+entry.getKey());
+		}
+		model.addAttribute("todoMonth", todoMonth);
+		model.addAttribute("todoTotal", todoTotal);
 		
 		return "admin/index";
 	}

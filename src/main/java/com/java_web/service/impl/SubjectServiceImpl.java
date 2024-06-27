@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.java_web.dto.reuqest.SubjectDTO;
 import com.java_web.model.Score;
+import com.java_web.model.StudyCredit;
 import com.java_web.model.Subject;
 import com.java_web.repository.ScoreRepository;
+import com.java_web.repository.StudyCreditRepository;
 import com.java_web.repository.SubjectRepository;
 import com.java_web.service.SubjectService;
 
@@ -24,8 +26,32 @@ public class SubjectServiceImpl implements SubjectService{
 	
 	private SubjectRepository sr;
 	private ScoreRepository scr;
+	private StudyCreditRepository stcr;
+	
+	public Subject chooseBest(List<Subject> rawList, int userId) {
+		Subject sub = new Subject();
+		
+		StudyCredit stc = stcr.findById(userId).get();
+		float temp = 0;
+		for (Subject item : rawList) {
+			float score = item.getCoding()*stc.getCoding() + item.getInteract()*stc.getInteract()
+					+ item.getDesigning()*stc.getDesigning() + item.getLogicalThinking()*stc.getLogicalThinking();
+			
+			if (score > temp) {
+				temp = score;
+				sub = item;
+			}
+		}
+		
+		return sub;
+	}
 
 	public List<Subject> checkExpected(List<Subject> rawList) {
+		/*
+		 * Check expected through not study subject, compare to all in one group to remove
+		 * if size of that group < default
+		 * result is group not done and null-obligated group *
+		 */
 		List<Subject> list = new ArrayList<>();
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -171,25 +197,44 @@ public class SubjectServiceImpl implements SubjectService{
 		List<Subject> rawList = checkExpected(sr.findNotStudy(userId));
 		List<SubjectDTO> list = new ArrayList<>();
 		
+		// Handle the most suitable in a group, map for separate group, then add the most suitable
+		Map<String, List<Subject>> smap = new HashMap<>(); //Save each group of subject
+		
 		rawList.forEach(item -> {
+			String note = item.getNote();
+			if (note != null) {
+				smap.computeIfAbsent(note, k -> new ArrayList<>()).add(item);
+			}
+		});
+		smap.values().forEach(subjectList -> {
+			Subject item = chooseBest(subjectList, userId);
+			subjectList.remove(item);
+			
+			SubjectDTO i = new SubjectDTO();
+			
+			i.setName(item.getName());
+			i.setDuration(item.getDuration());
+			i.setStatus("Dự kiến (Phù hợp)");
+			//i.setType();
+			i.setNote(item.getNote());
+			
+			list.add(i);
+		});
+
+		rawList.forEach(item -> {
+			if (item.getNote() == null) {
 			SubjectDTO i = new SubjectDTO();
 			
 			i.setName(item.getName());
 			i.setDuration(item.getDuration());
 			i.setStatus("Dự kiến");
-//			i.setType();
-//			i.setNote();
+			//i.setType();
+			//i.setNote(item.getNote());
 			
 			list.add(i);
+			}
 		});
 		
 		return list;
 	}
-
-	@Override
-	public SubjectDTO getSuitable(List<Subject> list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

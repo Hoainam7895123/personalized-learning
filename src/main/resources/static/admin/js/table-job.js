@@ -11,7 +11,7 @@ function showToast(toastId, toastContent, message) {
 
 (function() {
 	let delResponseInput = document.getElementById("delResponse");
-	if (delResponseInput) {
+	if (delResponseInput != null) {
 		let delResponse = delResponseInput.value;
 		if (delResponse != '') {
 			if (delResponse == 'true') {
@@ -24,7 +24,7 @@ function showToast(toastId, toastContent, message) {
 	
 	
 	let addResponseInput = document.getElementById("addResponse");
-	if (addResponseInput) {
+	if (addResponseInput != null) {
 		let addResponse = addResponseInput.value;
 		if (addResponse!='') {
 			if (addResponse=='true'){
@@ -36,7 +36,7 @@ function showToast(toastId, toastContent, message) {
 	}
 	
 	let editResponseInput = document.getElementById("editResponse");
-	if (editResponseInput) {
+	if (editResponseInput != null) {
 		let editResponse = editResponseInput.value;
 		if (editResponse!='') {
 			if(editResponse=='true') {
